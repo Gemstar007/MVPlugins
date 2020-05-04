@@ -28,7 +28,7 @@
 * @default 40
 *
 * @param Five Level Percent Multiplier
-* @desc Multiplier to be added when five levels below in percent (10 => 110% exp gain)
+* @desc Multiplier to be added when five levels or more below in percent (10 => 110% exp gain)
 * @default 50
 *
 * @help
@@ -50,7 +50,7 @@ ExpMultiplier.Helpers = {};
 //=============================================================================
 
   //Registers the Plugin for use 
-  var parameters = PluginManager.parameters("ExpMultiplier");
+  var parameters = PluginManager.parameters("MEE_ExpMultiplier");
   //A place that holds all the parameters from your plugin params above
   const ExpMultiplierParams = {
     ExpMultParam: [
@@ -67,24 +67,19 @@ ExpMultiplier.Helpers = {};
 
     var _Game_Actor_gainExp = Game_Actor.prototype.gainExp;
     Game_Actor.prototype.gainExp = function(exp) {
+      // Check we're gaining exp for killing baddies
       const deadTroops = $gameTroop.deadMembers();
       let bonusXp = 0;
       if (deadTroops !== undefined) {
         const actorLevel = this.level;
         bonusXp = $gameTroop.deadMembers().reduce(function(r, enemy) {
           const monsterLevel = getMonsterLevel($dataEnemies[enemy._enemyId].note)
-          let levelDiff;
-          levelDiff = Math.min(Math.max(monsterLevel - actorLevel, 0), 5); // between 0 and 5
-
-          console.log("Level diff: " + levelDiff);
-  
+          const levelDiff = Math.min(Math.max(monsterLevel - actorLevel, 0), 5); // between 0 and 5
           const multiplier = ExpMultiplierParams.ExpMultParam[levelDiff] / 100.0;
           return enemy.exp() * multiplier + r;
         }, 0);
       }
-      console.log("Bonus exp: " + bonusXp);
       _Game_Actor_gainExp.call(this, exp + bonusXp);
-      
     }
 //=============================================================================
 // Public API / Exports                                                             
@@ -95,7 +90,7 @@ ExpMultiplier.Helpers = {};
   // Private
   function getMonsterLevel(note) {
     const monsterLevelTag = /<\s*level\s*:\s*(\d+)\s*>/i.exec(note);
-    if (monsterLevelTag === undefined) {
+    if (monsterLevelTag === null) {
       // no tag
       return 0;
     } 
