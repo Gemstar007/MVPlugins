@@ -18,13 +18,13 @@
 */
 
 //Namespace for any code you create; replace this with your own name
-const MyNameSpace = {};
+const KiberianSucksD = {};
 
 //Create a new namespace for plugins
-MyNameSpace.Plugins = {};
+KiberianSucksD.Plugins = {};
 
 //Helpers for Utility Functions or for developer uses
-MyNameSpace.Helpers = {};
+KiberianSucksD.Helpers = {};
 
 (function($) {
 
@@ -56,4 +56,4 @@ MyNameSpace.Helpers = {};
 
   //Run All Plugin Code
   $.Plugins.RunCommonEventOnLoad();
-})(MyNameSpace);
+})(KiberianSucksD);
