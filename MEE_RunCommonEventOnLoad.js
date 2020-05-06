@@ -1,5 +1,5 @@
 //=============================================================================
-// PluginPattern.js                                                             
+// MEE_RunCommonEventOnLoad.js                                                             
 //=============================================================================
 
 
@@ -17,13 +17,8 @@
 * 
 */
 
-//Namespace for any code you create; replace this with your own name
 const KiberianSucksD = {};
-
-//Create a new namespace for plugins
 KiberianSucksD.Plugins = {};
-
-//Helpers for Utility Functions or for developer uses
 KiberianSucksD.Helpers = {};
 
 (function($) {
@@ -34,8 +29,7 @@ KiberianSucksD.Helpers = {};
 
   //Registers the Plugin for use 
   var parameters = PluginManager.parameters("MEE_RunCommonEventOnLoad");
-  //A place that holds all the parameters from your plugin params above
-  const PluginPatternParams = {
+  const CommonEventParams = {
     CommonEventNumber: Number(parameters['CommonEventNumber']),
   };
 
@@ -44,7 +38,7 @@ KiberianSucksD.Helpers = {};
     var _Game_Map_setup = Game_Map.prototype.setup;
     Game_Map.prototype.setup = function() {
       _Game_Map_setup.apply(this, arguments);
-      $gameTemp.reserveCommonEvent(PluginPatternParams.CommonEventNumber)
+      $gameTemp.reserveCommonEvent(CommonEventParams.CommonEventNumber)
     };
 
 //=============================================================================
@@ -54,6 +48,5 @@ KiberianSucksD.Helpers = {};
 
   };
 
-  //Run All Plugin Code
   $.Plugins.RunCommonEventOnLoad();
 })(KiberianSucksD);
