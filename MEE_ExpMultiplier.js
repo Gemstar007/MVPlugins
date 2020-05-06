@@ -7,9 +7,7 @@
 *
 * @author Jeremy Meese
 * @plugindesc Adds a multiplier to xp gain based on how far below the map level you are.  
-*             Requires you to add notetags per monster that is the expected player level. notetag: /<\s*level\s*:\s*(\d+)\s*>/i;
-*             Leaving level blank will result in no multiplication
-*             Caps at 5 level difference
+*             Requires you to add notetags per monster that is the expected player level. 
 *
 * @param One Level Percent Multiplier
 * @desc Multiplier to be added when one level below in percent (10 => 110% exp gain)
@@ -32,7 +30,9 @@
 * @default 50
 *
 * @help
-* This is no help
+* notetag: /<\s*level\s*:\s*(\d+)\s*>/i;
+* Leaving level blank will result in no multiplication
+* Caps at 5 level difference
 * 
 */
 
