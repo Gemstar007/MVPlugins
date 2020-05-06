@@ -17,10 +17,8 @@
 * 
 */
 
-const KiberianSucksD = {};
-KiberianSucksD.Plugins = {};
-KiberianSucksD.Helpers = {};
-
+var CommonEventRunner = CommonEventRunner || {};
+CommonEventRunner.Plugins = CommonEventRunner.Plugins || {};
 (function($) {
 
 //=============================================================================
@@ -49,4 +47,4 @@ KiberianSucksD.Helpers = {};
   };
 
   $.Plugins.RunCommonEventOnLoad();
-})(KiberianSucksD);
+})(CommonEventRunner);
